@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - ExploreNow</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: url("{% static 'images/2fff33ebc92b6c997d3b1cb1e83ae8d7.jpg' %}") no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-card {
+      background: rgba(255, 255, 255, 0.15); /* Transparent white */
+      backdrop-filter: blur(12px); /* Glass effect */
+      border-radius: 15px;
+      box-shadow: 0 4px 25px rgba(0,0,0,0.3);
+      padding: 35px;
+      max-width: 400px;
+      width: 100%;
+      color: white;
+    }
+
+    .login-card h3 {
+      font-weight: 600;
+      color: #fff;
+    }
+
+    label {
+      font-weight: 500;
+      color: #f8f9fa;
+    }
+
+    .form-control {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: #fff;
+    }
+
+    .form-control::placeholder {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .form-control:focus {
+      background: rgba(255,255,255,0.3);
+      box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.4);
+      color: #fff;
+    }
+
+    .btn-custom {
+      background: linear-gradient(90deg, #ff7e5f, #feb47b);
+      color: white;
+      font-weight: 500;
+      border: none;
+      transition: 0.3s;
+    }
+
+    .btn-custom:hover {
+      background: linear-gradient(90deg, #feb47b, #ff7e5f);
+    }
+
+    a {
+      color: #ffd28d;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-card">
+    <h3 class="text-center mb-4">Login</h3>
+
+    <form method="post" action="{% url 'login' %}">
+      {% csrf_token %}
+      
+      <div class="mb-3">
+        <label class="form-label">Email Address</label>
+        <input type="email" name="username" class="form-control" placeholder="you@example.com" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" name="password" class="form-control" placeholder="••••••••" required>
+      </div>
+
+      <button type="submit" class="btn btn-custom w-100">Login</button>
+
+      <p class="text-center mt-3">
+        Don’t have an account? <a href="{% url 'register' %}">Register here</a>
+      </p>
+    </form>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

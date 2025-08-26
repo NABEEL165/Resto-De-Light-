@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ExploreNow — Modern Transparent Style</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Icons (optional) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg1: linear-gradient(135deg, rgba(8,12,20,0.75), rgba(12,18,35,0.55));
+      --glass: rgba(255,255,255,0.06);
+      --glass-2: rgba(255,255,255,0.08);
+      --accent: #6C63FF;
+      --accent-2: #00D1FF;
+      --muted: rgba(187, 235, 250, 0.65);
+      --card-radius: 16px;
+      --card-padding: 18px;
+      --glass-border: rgba(255,255,255,0.08);
+      --shadow-1: 0 6px 30px rgba(10,10,20,0.45);
+      --glass-blur: 10px;
+      color-scheme: dark;
+    }
+
+    /* Reset & base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: 'Inter', 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, "Helvetica Neue", Arial;
+      background:
+        radial-gradient(1200px 600px at 10% 10%, rgba(108,99,255,0.12), transparent 8%),
+        radial-gradient(900px 500px at 90% 90%, rgba(0,209,255,0.06), transparent 6%),
+        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=60') center/cover no-repeat,
+        rgba(6,10,20,0.75);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      color: #eef3ff;
+      min-height:100vh;
+    }
+
+    /* Top navbar */
+    .nav {
+      position:fixed;
+      left:0; right:0;
+      top:16px;
+      z-index:50;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      pointer-events:none;
+    }
+    .nav .inner{
+      width:95%;
+      max-width:1200px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      pointer-events:auto;
+    }
+    .brand{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      padding:10px 14px;
+      border-radius:12px;
+      backdrop-filter: blur(var(--glass-blur));
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid var(--glass-border);
+      box-shadow: var(--shadow-1);
+    }
+    .brand .logo{
+      width:36px;height:36px;border-radius:8px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;
+      font-size:18px;
+    }
+    .brand .title{font-weight:700; letter-spacing:0.2px}
+
+    nav.menu{
+      display:flex;gap:12px;align-items:center;
+    }
+    nav.menu a{
+      color:var(--muted);
+      text-decoration:none;
+      padding:9px 12px;
+      border-radius:10px;
+      font-weight:600;
+      transition:all .18s ease;
+      font-size:14px;
+    }
+    nav.menu a:hover{
+      color:white;
+      transform:translateY(-2px);
+      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.03);
+    }
+
+    /* Hero */
+    .hero {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:120px 18px 60px;
+      min-height: calc(100vh - 40px);
+      position:relative;
+    }
+    .hero-grid{
+      width:95%;
+      max-width:1200px;
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:28px;
+      align-items:start;
+    }
+
+    .hero-left{
+      padding:24px;
+    }
+    .badge{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      padding:8px 12px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.03);
+      font-weight:600;
+      color:var(--muted);
+      font-size:13px;
+      width:fit-content;
+    }
+    .hero h1{
+      font-size:44px;
+      line-height:1.02;
+      margin:18px 0 12px;
+      color: #fff;
+      letter-spacing:-0.6px;
+      font-weight:800;
+    }
+    .hero p{
+      color:var(--muted);
+      max-width:680px;
+      margin:0 0 22px;
+      font-size:16px;
+    }
+    .actions{display:flex;gap:12px;align-items:center}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;border:none;cursor:pointer;
+      background: linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:white;font-weight:700;box-shadow: 0 10px 30px rgba(108,99,255,0.16);transition:transform .14s ease;
+    }
+    .btn.secondary{
+      background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.04);font-weight:600;
+      box-shadow:none;
+    }
+    .btn:active{transform:translateY(1px)}
+    .small-muted{color:var(--muted); font-size:13px;margin-left:6px}
+
+    /* Glass booking card */
+    .book-card{
+      border-radius: var(--card-radius);
+      padding: var(--card-padding);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border:1px solid var(--glass-border);
+      backdrop-filter: blur(calc(var(--glass-blur) + 3px)) saturate(1.05);
+      box-shadow: 0 10px 40px rgba(3,6,12,0.6);
+      position:relative;
+      margin-top: -40px;
+    }
+    .book-card h3{margin:0 0 8px;font-size:18px}
+    .form-row{display:flex;gap:10px;margin-bottom:10px}
+    .form-row .field{flex:1}
+    label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px;font-weight:600}
+    input[type="text"], input[type="email"], input[type="date"], input[type="number"], select, textarea{
+      width:100%;padding:10px 12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:#fff;
+      outline:none;font-size:14px;
+      transition:box-shadow .12s ease, border-color .12s ease;
+      backdrop-filter: blur(4px);
+    }
+    input:focus, select:focus, textarea:focus{
+      border-color: rgba(108,99,255,0.8);
+      box-shadow: 0 6px 20px rgba(108,99,255,0.08);
+    }
+    .submit-row{display:flex;gap:10px;align-items:center;margin-top:8px}
+
+    /* Destinations grid */
+    .destinations{
+      padding:60px 18px;
+    }
+    .cards{
+      width:95%;
+      max-width:1200px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+      gap:18px;
+    }
+    .dest-card{
+      position:relative;border-radius:14px;overflow:hidden;
+      background:linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.20));
+      border:1px solid rgba(255,255,255,0.04);
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .dest-card img{width:100%;height:200px;object-fit:cover;display:block}
+    .dest-card .overlay{
+      position:absolute;inset:0;padding:14px;display:flex;flex-direction:column;justify-content:flex-end;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 30%, rgba(0,0,0,0.45));
+    }
+    .dest-card h4{margin:0;color:#fff;font-size:18px}
+    .dest-card p{margin:6px 0;color:var(--muted);font-size:13px}
+    .dest-card .card-actions{display:flex;gap:8px;margin-top:10px}
+    .dest-card:hover{transform:translateY(-8px);box-shadow:0 18px 60px rgba(2,6,20,0.6)}
+
+    /* small footer card */
+    footer{
+      margin-top:40px;padding:28px 18px 60px;color:var(--muted);
+      display:flex;justify-content:center;
+    }
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero-grid{grid-template-columns: 1fr; gap:20px}
+      .book-card{margin-top:0}
+    }
+    @media (max-width:520px){
+      .hero h1{font-size:28px}
+      .brand .title{display:none}
+      nav.menu{display:none}
+    }
+
+    /* subtle floating animation for hero image */
+    .floaty {
+      transform-origin:center;
+      animation: floaty 8s ease-in-out infinite;
+    }
+    @keyframes floaty{
+      0%{transform:translateY(0) rotate(0.01deg)}
+      50%{transform:translateY(-8px) rotate(-0.25deg)}
+      100%{transform:translateY(0) rotate(0.01deg)}
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Top nav -->
+  <div class="nav" role="navigation">
+    <div class="inner">
+      <div class="brand" aria-label="ExploreNow">
+        <div class="logo">EN</div>
+        <div>
+          <div class="title">ExploreNow</div>
+          <div style="font-size:12px;color:var(--muted)">Discover. Book. Explore.</div>
+        </div>
+      </div>
+
+      <nav class="menu" aria-label="Main menu">
+        <a href="#" class="active">Home</a>
+        <a href="#destinations">Destinations</a>
+        <a href="/book/">Bookings</a>
+        <a href="#contact">Contact</a>
+        <a href="/login/">login</a>
+        <a href="adminlogin/">login</a>
+
+        
+        
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="badge"><i class="bi bi-airplane-fill"></i> Trending deals</div>
+        <h1>Discover your next <span style="background:linear-gradient(90deg,var(--accent),var(--accent-2)); -webkit-background-clip:text; background-clip:text; color:transparent">adventure</span></h1>
+        <p>Handpicked travel packages, transparent pricing, and local experiences — all in one place. Fast booking, trusted partners, and delightful trips.</p>
+
+        <div class="actions" aria-hidden>
+          <button class="btn" onclick="document.getElementById('booking-form').scrollIntoView({behavior:'smooth'})">
+            <i class="bi bi-calendar2-check"></i> Book a trip
+          </button>
+          <button class="btn secondary"><i class="bi bi-heart-fill"></i> Saved</button>
+        </div>
+
+        <div style="height:18px"></div>
+
+        <!-- Small feature row -->
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+          <div style="min-width:180px;padding:12px;border-radius:12px;background:var(--glass-2);border:1px solid rgba(255,255,255,0.03);backdrop-filter:blur(6px)">
+            <div style="font-size:13px;color:var(--muted)">Verified partners</div>
+            <div style="font-weight:700;margin-top:6px">+1200 Hosts</div>
+          </div>
+          <div style="min-width:180px;padding:12px;border-radius:12px;background:var(--glass-2);border:1px solid rgba(255,255,255,0.03);backdrop-filter:blur(6px)">
+            <div style="font-size:13px;color:var(--muted)">Flexible cancellation</div>
+            <div style="font-weight:700;margin-top:6px">Free within 24h</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Booking card (glass) -->
+    <aside class="book-card floaty" id="booking-form" aria-labelledby="book-heading">
+    <h3 id="book-heading">Quick Booking</h3>
+    <p style="color:var(--muted);font-size:13px;margin-top:6px;margin-bottom:12px">
+        Enter your trip details and we’ll find the best options.
+    </p>
+
+    <form method="post" action="">
+        {% csrf_token %}
+        
+        <div class="form-row">
+            <div class="field">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" placeholder="Your full name" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="you@example.com" required>
+            </div>
+            <div class="field">
+                <label for="phone">Phone</label>
+                <input id="phone" name="phone" type="text" placeholder="+91 98765 43210" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="field">
+                <label for="destination">Destination</label>
+                <select id="destination" name="destination" required>
+                    <option value="">Choose destination</option>
+                    <option>Paris</option>
+                    <option>Maldives</option>
+                    <option>New York</option>
+                    <option>Ooty</option>
+                </select>
+            </div>
+            <div class="field">
+                <label for="date">Travel Date</label>
+                <input id="date" name="travel_date" type="date" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="field">
+                <label for="guests">Guests</label>
+                <input id="guests" name="guests" type="number" min="1" value="1">
+            </div>
+            <div class="field">
+                <label for="budget">Budget</label>
+                <select id="budget" name="budget">
+                    <option value="">Any</option>
+                    <option>Under $500</option>
+                    <option>$500 - $1500</option>
+                    <option>$1500+</option>
+                </select>
+            </div>
+        </div>
+
+        <div style="margin-top:6px">
+            <label for="notes">Notes (optional)</label>
+            <textarea id="notes" name="notes" rows="3" placeholder="Special requests..."></textarea>
+        </div>
+
+        <div class="submit-row">
+            <button type="submit" class="btn" style="flex:1"><i class="bi bi-send-fill"></i> Confirm Booking</button>
+        </div>
+    </form>
+
+    <div style="font-size:13px;color:var(--muted);margin-top:12px">
+        No payment required to request availability.
+    </div>
+</aside>
+
+  </header>
+
+  <!-- Popular Destinations -->
+  <section id="destinations" class="destinations">
+    <div style="width:95%;max-width:1200px;margin:0 auto;">
+      <h2 style="font-size:22px;margin:0 0 12px">Popular Destinations</h2>
+      <p style="color:var(--muted);margin:0 0 18px">Handpicked escapes crafted for you.</p>
+    </div>
+
+    <div class="cards" aria-live="polite">
+      <!-- Card 1 -->
+      <div class="dest-card">
+        <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1200&q=60" alt="Paris">
+        <div class="overlay">
+          <h4>Paris</h4>
+          <p>City of light — romantic walks & gourmet dining.</p>
+          <div class="card-actions">
+            <a href="#" class="btn" style="padding:8px 12px;font-size:13px">Book</a>
+            <a href="#" class="btn secondary" style="padding:8px 10px;font-size:13px">Details</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="dest-card">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=60" alt="Maldives">
+        <div class="overlay">
+          <h4>Maldives</h4>
+          <p>White sand beaches & crystal lagoons.</p>
+          <div class="card-actions">
+            <a href="#" class="btn" style="padding:8px 12px;font-size:13px">Book</a>
+            <a href="#" class="btn secondary" style="padding:8px 10px;font-size:13px">Details</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="dest-card">
+        <img src="https://images.unsplash.com/photo-1549887534-4c1e6ae06d30?auto=format&fit=crop&w=1200&q=60" alt="New York">
+        <div class="overlay">
+          <h4>New York</h4>
+          <p>Fast-paced city life, iconic sights.</p>
+          <div class="card-actions">
+            <a href="#" class="btn" style="padding:8px 12px;font-size:13px">Book</a>
+            <a href="#" class="btn secondary" style="padding:8px 10px;font-size:13px">Details</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="dest-card">
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=60" alt="Ooty">
+        <div class="overlay">
+          <h4>Ooty</h4>
+          <p>Tea gardens, misty hills and cozy stays.</p>
+          <div class="card-actions">
+            <a href="#" class="btn" style="padding:8px 12px;font-size:13px">Book</a>
+            <a href="#" class="btn secondary" style="padding:8px 10px;font-size:13px">Details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <div style="width:95%;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+      <div>
+        <div style="font-weight:700">ExploreNow</div>
+        <div style="font-size:13px;color:var(--muted)">Trusted travel experiences • © 2025</div>
+      </div>
+      <div style="color:var(--muted);font-size:13px">Need help? <a href="mailto:help@explorenow.com" style="color:var(--muted);text-decoration:underline">help@explorenow.com</a></div>
+    </div>
+  </footer>
+
+  <script>
+    // Small accessibility & progressive JS
+    (function(){
+      // Smooth scroll for internal links
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', function(e){
+          const target = document.querySelector(this.getAttribute('href'));
+          if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth', block:'center'}) }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

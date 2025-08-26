@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - ExploreNow</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: url("{% static 'images/043aab281dd5b38b2129323ca1fc2471.jpg' %}") no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    /* Glassmorphism Card */
+    .admin-card {
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 40px 30px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 0.7s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Title Styling */
+    .admin-card h3 {
+      font-weight: 700;
+      margin-bottom: 25px;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+    /* Form Elements */
+    form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    label {
+      font-weight: 500;
+      color: #f8f9fa;
+      margin-bottom: 5px;
+    }
+
+    .form-control {
+      background: rgba(255,255,255,0.15);
+      border: none;
+      color: white;
+      padding: 12px;
+      border-radius: 10px;
+    }
+
+    .form-control::placeholder {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .form-control:focus {
+      background: rgba(255,255,255,0.25);
+      box-shadow: 0 0 0 0.2rem rgba(255,255,255,0.3);
+    }
+
+    /* Button Style */
+    .btn-admin {
+      background: linear-gradient(90deg, #ff4e50, #f9d423);
+      border: none;
+      font-weight: 600;
+      padding: 12px;
+      border-radius: 10px;
+      color: white;
+      transition: 0.3s ease-in-out;
+    }
+
+    .btn-admin:hover {
+      background: linear-gradient(90deg, #f9d423, #ff4e50);
+      transform: scale(1.03);
+    }
+
+    /* Link Style */
+    .small-link {
+      font-size: 0.9rem;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .small-link a {
+      color: #ffd28d;
+      text-decoration: none;
+    }
+
+    .small-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="admin-card">
+    <h3>Admin Login</h3>
+    <form method="post" action="{% url 'admin_login' %}">
+      {% csrf_token %}
+      <div>
+        <label for="username">Username</label>
+        <input id="username" type="text" name="username" class="form-control" placeholder="Enter admin username" required>
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <input id="password" type="password" name="password" class="form-control" placeholder="Enter password" required>
+      </div>
+      <button type="submit" class="btn btn-admin w-100">Login</button>
+      <div class="small-link">
+        <a href="{% url 'login' %}">Back to User Login</a>
+      </div>
+    </form>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
